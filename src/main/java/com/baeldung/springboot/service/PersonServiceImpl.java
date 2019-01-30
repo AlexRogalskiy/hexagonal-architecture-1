@@ -43,7 +43,7 @@ public class PersonServiceImpl implements PersonService {
 
 		Optional<Person> person = personRepository.findById(personId);
 
-		return person.orElseThrow(() -> new PersonException(personId.toString(), "404", "Runner Not Found"));
+		return person.orElseThrow(() -> new PersonException(personId.toString(), "404", "Person Not Found"));
 
 	}
 

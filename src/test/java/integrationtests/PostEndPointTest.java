@@ -9,11 +9,11 @@ import junitrunner.E2eJunitRunner;
 
 @TargetEnv("application_host.properties")
 @RunWith(E2eJunitRunner.class)
-public class TestPostAndThenGetOperation {
+public class PostEndPointTest {
 
 	@Test
-    @JsonTestCase("integration_tests/get/get_person_by_personid_test.json")
-    public void test_registerpersonAndThenFetchDetaillsOfNewRunner() throws Exception {
+    @JsonTestCase("integration_tests/post/post_new_person.json")
+    public void test_personRegistration() throws Exception {
     }
 	
 }

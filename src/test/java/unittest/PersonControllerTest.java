@@ -1,15 +1,14 @@
 package unittest;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.ArgumentMatchers.anyLong;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.BDDMockito.given;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.patch;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-
-import java.io.File;
-
+import com.baeldung.springboot.controller.PersonController;
+import com.baeldung.springboot.entity.Person;
+import com.baeldung.springboot.exception.GlobalExceptionHandler;
+import com.baeldung.springboot.exception.PersonException;
+import com.baeldung.springboot.model.PersonResponse;
+import com.baeldung.springboot.model.dto.PersonDto;
+import com.baeldung.springboot.service.PersonServiceImpl;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -24,19 +23,18 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.util.ResourceUtils;
 
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.baeldung.springboot.entity.Person;
-import com.baeldung.springboot.exception.GlobalExceptionHandler;
-import com.baeldung.springboot.exception.PersonException;
-import com.baeldung.springboot.model.PersonResponse;
-import com.baeldung.springboot.model.dto.PersonDto;
-import com.baeldung.springboot.controller.PersonController;
-import com.baeldung.springboot.service.PersonServiceImpl;
+import java.io.File;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyLong;
+import static org.mockito.BDDMockito.given;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 
 
 @RunWith(MockitoJUnitRunner.Silent.class)
-public class PersonControllerResourceTest {
+public class PersonControllerTest {
 
     private MockMvc mockMvc;
 
@@ -82,7 +80,7 @@ public class PersonControllerResourceTest {
     public void testGetpersonById_WithRecordNotFound_thenRespondWith_404() throws Exception {
 
         // GIVEN
-        given(personServiceImpl.getPersonById(anyLong())).willThrow(new PersonException("2", "404", "Runner not found"));
+        given(personServiceImpl.getPersonById(anyLong())).willThrow(new PersonException("2", "404", "Person not found"));
 
         // WHEN
         MockHttpServletResponse response = this.mockMvc.perform(get("/api/v1/persons/2")).andReturn().getResponse();
@@ -90,8 +88,6 @@ public class PersonControllerResourceTest {
         // THEN
         assertThat(response).isNotNull();
         assertThat(response.getStatus()).isEqualTo(HttpStatus.NOT_FOUND.value());
-
-
     }
 
     @Test
@@ -103,7 +99,6 @@ public class PersonControllerResourceTest {
         // THEN
         assertThat(response).isNotNull();
         assertThat(response.getStatus()).isEqualTo(HttpStatus.BAD_REQUEST.value());
-
     }
 
     @Test
@@ -126,7 +121,6 @@ public class PersonControllerResourceTest {
 
         given(personServiceImpl.createPerson(any(PersonDto.class))).willReturn(mockResponse);
 
-
         //WHEN
         MockHttpServletResponse response = this.mockMvc
                 .perform(post("/api/v1/persons").
@@ -137,15 +131,13 @@ public class PersonControllerResourceTest {
         //THEN
         assertThat(response).isNotNull();
         assertThat(response.getStatus()).isEqualTo(HttpStatus.CREATED.value());
-
     }
 
     private Person prepareMockServiceResponse_getpersonById() throws Exception {
 
         File personByIdResponse = ResourceUtils
                 .getFile("classpath:data_files/response/get_person_byId_response_body.json");
-        return objectMapper.readValue(personByIdResponse, new TypeReference<Person>() {
-        });
+        return objectMapper.readValue(personByIdResponse, new TypeReference<Person>() { });
 
     }
 
