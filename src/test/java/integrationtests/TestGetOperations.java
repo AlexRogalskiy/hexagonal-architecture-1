@@ -5,7 +5,7 @@ import org.jsmart.zerocode.core.domain.TargetEnv;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import testconfig.E2eJunitRunner;
+import junitrunner.E2eJunitRunner;
 
 
 @TargetEnv("application_host.properties")
@@ -14,7 +14,7 @@ public class TestGetOperations {
 
     @Test
     @JsonTestCase("integration_tests/negative/negative_get_person_by_invalid_id.json")
-    public void test_getParkRunnerWithValidAndInvalidid(){
+    public void test_getpersonWithValidAndInvalidid(){
     	
     }
 

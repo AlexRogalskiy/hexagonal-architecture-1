@@ -58,10 +58,10 @@ public class PersonControllerResourceTest {
     }
 
     @Test
-    public void testGetParkRunnerById_WhenRecordExist_thenRespondWith_200() throws Exception {
+    public void testGetpersonById_WhenRecordExist_thenRespondWith_200() throws Exception {
 
         // GIVEN
-        Person mockServiceResponse = prepareMockServiceResponse_getParkRunnerById();
+        Person mockServiceResponse = prepareMockServiceResponse_getpersonById();
         given(personServiceImpl.getPersonById(anyLong())).willReturn(mockServiceResponse);
 
         // WHEN
@@ -79,7 +79,7 @@ public class PersonControllerResourceTest {
     }
 
     @Test
-    public void testGetParkRunnerById_WithRecordNotFound_thenRespondWith_404() throws Exception {
+    public void testGetpersonById_WithRecordNotFound_thenRespondWith_404() throws Exception {
 
         // GIVEN
         given(personServiceImpl.getPersonById(anyLong())).willThrow(new PersonException("2", "404", "Runner not found"));
@@ -95,7 +95,7 @@ public class PersonControllerResourceTest {
     }
 
     @Test
-    public void testGetParkRunnerById_WithInCorrectIdPattern_thenRespondWith_400() throws Exception {
+    public void testGetpersonById_WithInCorrectIdPattern_thenRespondWith_400() throws Exception {
 
         // WHEN
         MockHttpServletResponse response = this.mockMvc.perform(get("/api/v1/persons/ZZ")).andReturn().getResponse();
@@ -107,7 +107,7 @@ public class PersonControllerResourceTest {
     }
 
     @Test
-    public void testRegisterParkRunner_WithValidRequest_ThenRespondWith_201() throws Exception {
+    public void testRegisterperson_WithValidRequest_ThenRespondWith_201() throws Exception {
 
         //GIVEN
         PersonDto personDto = new PersonDto();
@@ -140,11 +140,11 @@ public class PersonControllerResourceTest {
 
     }
 
-    private Person prepareMockServiceResponse_getParkRunnerById() throws Exception {
+    private Person prepareMockServiceResponse_getpersonById() throws Exception {
 
-        File parkRunnerByIdResponse = ResourceUtils
-                .getFile("classpath:data_files/response/get_parkrunner_byId_response_body.json");
-        return objectMapper.readValue(parkRunnerByIdResponse, new TypeReference<Person>() {
+        File personByIdResponse = ResourceUtils
+                .getFile("classpath:data_files/response/get_person_byId_response_body.json");
+        return objectMapper.readValue(personByIdResponse, new TypeReference<Person>() {
         });
 
     }

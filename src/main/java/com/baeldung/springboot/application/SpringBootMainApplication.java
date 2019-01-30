@@ -9,6 +9,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
+import static org.springframework.boot.SpringApplication.run;
+
 
 @SpringBootApplication
 @ComponentScan(basePackages = "com.baeldung.springboot.*")
@@ -17,15 +19,15 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 public class SpringBootMainApplication {
 	
 	public static void main(String[] args) {
-		
-		SpringApplication application=new SpringApplication(SpringBootMainApplication.class);
-		application.addListeners(new ApplicationPidFileWriter());
-		SpringApplication.run(SpringBootMainApplication.class, args);
+
+	    start();
+
 	}
-	
 
     public static void start()  {
-    	 SpringApplication.run(SpringBootMainApplication.class);
+
+    	 run(SpringBootMainApplication.class);
+
     }
     
     @Bean

@@ -24,7 +24,7 @@ public class PersonController {
 	}
 	
 	@GetMapping("/{id}")
-	public ResponseEntity<Person> getParkRunner(@PathVariable Long id) throws PersonException {
+	public ResponseEntity<Person> getperson(@PathVariable Long id) throws PersonException {
 		
 		return new ResponseEntity<>(personService.getPersonById(id), HttpStatus.OK);
 		

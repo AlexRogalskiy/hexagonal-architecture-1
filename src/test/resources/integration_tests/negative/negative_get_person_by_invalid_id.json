@@ -1,8 +1,8 @@
 {
-    "scenarioName": "Get ParkRuner by Id with valid and invalid id",
+    "scenarioName": "Get Person by Id with valid and invalid id",
     "steps": [
         {
-            "name": "get_parkRunner_byInvalidId",
+            "name": "get_person_byInvalidId",
             "url": "/services/api/v1/persons/999",
             "operation": "GET",
             "request": {
