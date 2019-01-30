@@ -3,7 +3,7 @@
     "steps": [
         {
             "name": "create_person",
-            "url": "/parkrun/api/v1/persons/",
+            "url": "/services/api/v1/persons/",
             "operation": "POST",
             "request": {
                 "body": {
@@ -26,7 +26,7 @@
         },
         {
             "name": "get_ParkRunner_by_id",
-            "url": "/parkrun/api/v1/persons/${$.create_person.response.body.location}",
+            "url": "/services/api/v1/persons/${$.create_person.response.body.location}",
             "operation": "GET",
             "request": {
             },

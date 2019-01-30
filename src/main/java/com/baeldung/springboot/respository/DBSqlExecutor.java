@@ -43,7 +43,7 @@ public class DBSqlExecutor {
     private JdbcTemplate getJdbcTemplate() throws IllegalAccessException, InvocationTargetException, InstantiationException {
 
         final String driverClassName = "org.h2.Driver";
-        final String jdbcUrl = "jdbc:h2:mem:parkrundb;DB_CLOSE_ON_EXIT=FALSE";
+        final String jdbcUrl = "jdbc:h2:mem:personsdb;DB_CLOSE_ON_EXIT=FALSE";
         final String username = "run";
         final String password = "";
         // Build dataSource & JDBC template manually

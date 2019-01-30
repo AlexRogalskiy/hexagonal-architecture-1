@@ -3,7 +3,7 @@
     "steps": [
         {
             "name": "post_registration_at_ParkRun",
-            "url": "/parkrun/api/v1/persons/",
+            "url": "/services/api/v1/persons/",
             "operation": "POST",
             "request": {
                 "body": {

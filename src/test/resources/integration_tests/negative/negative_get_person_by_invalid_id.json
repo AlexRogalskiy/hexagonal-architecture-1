@@ -3,7 +3,7 @@
     "steps": [
         {
             "name": "get_parkRunner_byInvalidId",
-            "url": "/parkrun/api/v1/persons/999",
+            "url": "/services/api/v1/persons/999",
             "operation": "GET",
             "request": {
             },
