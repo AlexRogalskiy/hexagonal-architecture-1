@@ -11,7 +11,8 @@
     <properties>
         <maven.compiler.target>1.8</maven.compiler.target>
         <maven.compiler.source>1.8</maven.compiler.source>
-        <version.zerocode-rest-bdd>1.2.8</version.zerocode-rest-bdd>
+        <version.zerocode-rest-bdd>1.2.17</version.zerocode-rest-bdd>
+        <version.modelmapper>2.3.0</version.modelmapper>
     </properties>
     <parent>
         <groupId>org.springframework.boot</groupId>
@@ -43,10 +44,6 @@
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-actuator</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-jdbc</artifactId>
         </dependency>
         <dependency>
@@ -62,7 +59,7 @@
         <dependency>
             <groupId>org.modelmapper</groupId>
             <artifactId>modelmapper</artifactId>
-            <version>2.3.0</version>
+            <version>${version.modelmapper}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
