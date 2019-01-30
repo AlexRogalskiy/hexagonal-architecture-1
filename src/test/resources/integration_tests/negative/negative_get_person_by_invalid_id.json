@@ -1,0 +1,19 @@
+{
+    "scenarioName": "Get ParkRuner by Id with valid and invalid id",
+    "steps": [
+        {
+            "name": "get_parkRunner_byInvalidId",
+            "url": "/parkrun/api/v1/persons/999",
+            "operation": "GET",
+            "request": {
+            },
+            "assertions": {
+                "status": 404,
+                "body": {
+                    "code": "404",
+                    "message": "Runner Not Found"
+                }
+            }
+        }
+    ]
+}

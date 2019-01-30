@@ -6,7 +6,7 @@ import java.util.Map;
 
 import javax.sql.DataSource;
 
-import com.baeldung.springboot.entity.ParkRunner;
+import com.baeldung.springboot.entity.Person;
 import org.h2.Driver;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,26 +17,24 @@ import org.springframework.jdbc.datasource.SimpleDriverDataSource;
 import org.springframework.stereotype.Repository;
 import org.springframework.util.ClassUtils;
 
-/**
- * @author Neeraj Sidhaye
- */
+
 @Repository
 public class DBSqlExecutor {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(DBSqlExecutor.class);
 
-    public List<ParkRunner> executeSimpleSql(String simpleSql) throws IllegalAccessException, InvocationTargetException, InstantiationException {
+    public List<Person> executeSimpleSql(String simpleSql) throws IllegalAccessException, InvocationTargetException, InstantiationException {
 
         LOGGER.info("DBSqlExecutor: executeSimpleSql :: simpleSql -> {} ", simpleSql);
 
-        return getJdbcTemplate().query(simpleSql, new BeanPropertyRowMapper<ParkRunner>(ParkRunner.class));
+        return getJdbcTemplate().query(simpleSql, new BeanPropertyRowMapper<Person>(Person.class));
     }
 
-    public List<ParkRunner> executeSqlWithParam(Map<String, String> sql) throws IllegalAccessException, InvocationTargetException, InstantiationException {
+    public List<Person> executeSqlWithParam(Map<String, String> sql) throws IllegalAccessException, InvocationTargetException, InstantiationException {
 
         LOGGER.info("DBSqlExecutor: executeSqlWithParam :: sql with Param -> {}, {} ", sql.get("sqlQuery"), sql.get("paramValue"));
 
-        return getJdbcTemplate().query(sql.get("sqlQuery"), new Object[]{sql.get("paramValue")}, new BeanPropertyRowMapper<ParkRunner>(ParkRunner.class));
+        return getJdbcTemplate().query(sql.get("sqlQuery"), new Object[]{sql.get("paramValue")}, new BeanPropertyRowMapper<Person>(Person.class));
 
     }
 

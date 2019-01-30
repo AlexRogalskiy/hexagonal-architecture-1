@@ -5,11 +5,6 @@ import org.junit.runners.model.InitializationError;
 
 import com.baeldung.springboot.application.SpringBootMainApplication;
 
-/**
- * 
- * @author Neeraj Sidhaye
- *
- */
 public class E2eJunitSuiteRunner extends ZeroCodePackageRunner {
 
     static{

@@ -1,11 +1,11 @@
 package com.baeldung.springboot.model;
 
-public class ParkRunResponse {
+public class PersonResponse {
 
 	private String message;
 	private String location;
 	
-	public ParkRunResponse(String message, String location) {
+	public PersonResponse(String message, String location) {
 		this.message = message;
 		this.location=location;
 	}

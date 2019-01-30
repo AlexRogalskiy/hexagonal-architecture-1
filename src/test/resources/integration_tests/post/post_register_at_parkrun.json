@@ -1,23 +1,20 @@
 {
     "scenarioName": "Post Registration at ParkRun.",
     "steps": [
-	       {
-	        "name": "post_registration_at_ParkRun",
-            "url": "/parkrun/api/v1/runners/",
+        {
+            "name": "post_registration_at_ParkRun",
+            "url": "/parkrun/api/v1/persons/",
             "operation": "POST",
             "request": {
-            	 "body": "${JSON.FILE:reusable_content/request/register_runner_request_body.json}"
-              },
+                "body": "${JSON.FILE:reusable_content/request/register_runner_request_body.json}"
+            },
             "assertions": {
                 "status": 201,
                 "body": {
-                    "location" : "$NOT.NULL",
-                    "message" : "$CONTAINS.STRING:Success"
+                    "location": "$NOT.NULL",
+                    "message": "$CONTAINS.STRING:Success"
                 }
             }
-       
-	       }
-    
+        }
     ]
-    
 }

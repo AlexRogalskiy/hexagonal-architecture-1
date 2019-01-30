@@ -9,11 +9,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
-/**
- * 
- * @author Neeraj Sidhaye
- *
- */
+
 @SpringBootApplication
 @ComponentScan(basePackages = "com.baeldung.springboot.*")
 @EnableJpaRepositories("com.baeldung.springboot.*")

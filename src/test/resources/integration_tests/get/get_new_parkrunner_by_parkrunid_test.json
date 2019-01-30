@@ -3,7 +3,7 @@
    "steps":[
       {
          "name":"registration_at_ParkRun",
-         "url":"/parkrun/api/v1/runners/",
+         "url":"/parkrun/api/v1/persons/",
          "operation":"POST",
          "request":{
             "body": "${JSON.FILE:reusable_content/request/register_runner_request_body.json}"
@@ -17,8 +17,8 @@
          }
       },
       {
-         "name":"get_ParkRunner_by_parkRunId",
-         "url":"/parkrun/api/v1/runners/${$.registration_at_ParkRun.response.body.location}",
+         "name":"get_ParkRunner_by_id",
+         "url":"/parkrun/api/v1/persons/${$.registration_at_ParkRun.response.body.location}",
          "operation":"GET",
          "request":{
 
@@ -26,7 +26,7 @@
          "assertions":{
             "status":200,
             "body":{
-               "parkRunId":"$NOT.NULL"
+               "id":"$NOT.NULL"
             }
          }
       }

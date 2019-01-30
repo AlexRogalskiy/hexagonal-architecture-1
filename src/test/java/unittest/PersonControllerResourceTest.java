@@ -27,31 +27,25 @@ import org.springframework.util.ResourceUtils;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.baeldung.springboot.entity.ParkRunner;
+import com.baeldung.springboot.entity.Person;
 import com.baeldung.springboot.exception.GlobalExceptionHandler;
 import com.baeldung.springboot.exception.ParkRunException;
-import com.baeldung.springboot.model.ParkRunResponse;
-import com.baeldung.springboot.model.dto.PartialUpdateDTO;
+import com.baeldung.springboot.model.PersonResponse;
 import com.baeldung.springboot.model.dto.PersonDto;
-import com.baeldung.springboot.controller.ParkRun;
+import com.baeldung.springboot.controller.PersonController;
 import com.baeldung.springboot.service.PersonServiceImpl;
 
 
-/**
- * 
- * @author Neeraj Sidhaye
- *
- */
 
 @RunWith(MockitoJUnitRunner.Silent.class)
-public class ParkRunResourceTest {
+public class PersonControllerResourceTest {
 	
 	private MockMvc mockMvc;
 	
 	private ObjectMapper objectMapper;
 	
 	@InjectMocks
-	ParkRun parkRunController;
+    PersonController personControllerController;
 	
 	@Mock
 	PersonServiceImpl personServiceImpl;
@@ -61,50 +55,27 @@ public class ParkRunResourceTest {
 	
 	@Before
 	public void setup() {
-		mockMvc = MockMvcBuilders.standaloneSetup(parkRunController).setControllerAdvice(new GlobalExceptionHandler()).build();
+		mockMvc = MockMvcBuilders.standaloneSetup(personControllerController).setControllerAdvice(new GlobalExceptionHandler()).build();
 		objectMapper = new ObjectMapper();
-	}
-	
-	@Test
-	public void testGetAllParkRunners_for_200() throws Exception {
-		
-		// GIVEN
-		List<ParkRunner>  mockServiceResponse = prepareMockServiceResponse_getAllParkRunners();
-		given(personServiceImpl.getAllParkRunners()).willReturn(mockServiceResponse);
-		
-		//  WHEN
-		MockHttpServletResponse  response = this.mockMvc.perform(get("/api/v1/runners")).andReturn().getResponse();
-		
-		
-		//THEN
-		
-		assertThat(response).isNotNull();
-		assertThat(response.getStatus()).isEqualTo(HttpStatus.OK.value());
-		
-		List<ParkRunner> allParkRunners = objectMapper.readValue(response.getContentAsString(), new TypeReference<List<ParkRunner>>() {});
-		
-		assertThat(allParkRunners.size()).isGreaterThan(0);
-		assertThat(allParkRunners.get(0).getParkRunId()).isNotNull();
-		
 	}
 	
 	@Test
 	public void testGetParkRunnerById_WhenRecordExist_thenRespondWith_200() throws Exception{
 		
 		// GIVEN
-		ParkRunner mockServiceResponse = prepareMockServiceResponse_getParkRunnerById();
+		Person mockServiceResponse = prepareMockServiceResponse_getParkRunnerById();
 		given(personServiceImpl.getParkRunnerById(anyLong())).willReturn(mockServiceResponse);
 		
 		// WHEN
-		MockHttpServletResponse  response = this.mockMvc.perform(get("/api/v1/runners/1")).andReturn().getResponse();
+		MockHttpServletResponse  response = this.mockMvc.perform(get("/api/v1/persons/1")).andReturn().getResponse();
 		
 		//THEN
 		assertThat(response).isNotNull();
 		assertThat(response.getStatus()).isEqualTo(HttpStatus.OK.value());
 		
-		ParkRunner parkRunner = objectMapper.readValue(response.getContentAsString(), new TypeReference<ParkRunner>(){});
+		Person person = objectMapper.readValue(response.getContentAsString(), new TypeReference<Person>(){});
 		
-		assertThat(parkRunner).hasFieldOrProperty("parkRunId").isNotNull();
+		assertThat(person).hasFieldOrProperty("id").isNotNull();
 		
 	}
 	
@@ -115,7 +86,7 @@ public class ParkRunResourceTest {
 		given(personServiceImpl.getParkRunnerById(anyLong())).willThrow(new ParkRunException("2","404", "Runner not found"));
 		
 		// WHEN
-		MockHttpServletResponse  response  = this.mockMvc.perform(get("/api/v1/runners/2")).andReturn().getResponse();
+		MockHttpServletResponse  response  = this.mockMvc.perform(get("/api/v1/persons/2")).andReturn().getResponse();
 		
 		// THEN
 		assertThat(response).isNotNull();
@@ -128,7 +99,7 @@ public class ParkRunResourceTest {
 	public void testGetParkRunnerById_WithInCorrectIdPattern_thenRespondWith_400() throws Exception {
 		
 		// WHEN
-		MockHttpServletResponse  response  = this.mockMvc.perform(get("/api/v1/runners/ZZ")).andReturn().getResponse();
+		MockHttpServletResponse  response  = this.mockMvc.perform(get("/api/v1/persons/ZZ")).andReturn().getResponse();
 		
 		// THEN
 		assertThat(response).isNotNull();
@@ -137,40 +108,13 @@ public class ParkRunResourceTest {
 	}
 	
 	@Test
-	public void testUpdateParkRunner_WithValidId_ThenRespondWith_200() throws Exception {
-		
-		//GIVEN
-		PartialUpdateDTO partialUpdateDTO = new PartialUpdateDTO();
-		partialUpdateDTO.setTotalRuns("200");
-		
-		String requestPayLoad = objectMapper.writeValueAsString(partialUpdateDTO);
-		
-		ParkRunResponse mockResponse = new ParkRunResponse("Update Success.", "2");
-		
-		given(personServiceImpl.updateRunnerProfile(anyLong(), any(ParkRunner.class))).willReturn(mockResponse);
-		
-		
-		//WHEN
-		MockHttpServletResponse response = this.mockMvc.perform(patch("/api/v1/runners/2").
-																							contentType(MediaType.APPLICATION_JSON_UTF8).
-																							content(requestPayLoad)).
-																							andReturn().getResponse();
-		
-		//THEN
-		assertThat(response).isNotNull();
-		assertThat(response.getStatus()).isEqualTo(HttpStatus.OK.value());
-		
-	}
-	
-	
-	@Test
 	public void testRegisterParkRunner_WithValidRequest_ThenRespondWith_201() throws Exception {
 		
 		//GIVEN
 		PersonDto personDto = new PersonDto();
 		
-		personDto.setFirstName("Neeraj");
-		personDto.setLastName("Sidhaye");
+		personDto.setFirstName("FirstJava");
+		personDto.setLastName("LastJava");
 		personDto.setGender("M");
 		personDto.setHomeRun("PUNE RUNNING");
 		personDto.setRunningClub("RUNWAY");
@@ -179,13 +123,13 @@ public class ParkRunResourceTest {
 		
 		String requestPayLoad = objectMapper.writeValueAsString(personDto);
 		
-		ParkRunResponse mockResponse = new ParkRunResponse("Registration Success.", "2");
+		PersonResponse mockResponse = new PersonResponse("Registration Success.", "2");
 		
-		given(personServiceImpl.registerRunner(any(ParkRunner.class))).willReturn(mockResponse);
+		given(personServiceImpl.createPerson(any(PersonDto.class))).willReturn(mockResponse);
 		
 		
 		//WHEN
-		MockHttpServletResponse response = this.mockMvc.perform(post("/api/v1/runners").
+		MockHttpServletResponse response = this.mockMvc.perform(post("/api/v1/persons").
 																							contentType(MediaType.APPLICATION_JSON_UTF8).
 																							content(requestPayLoad)).
 																							andReturn().getResponse();
@@ -196,17 +140,10 @@ public class ParkRunResourceTest {
 		
 	}
 	
-	private List<ParkRunner> prepareMockServiceResponse_getAllParkRunners() throws Exception {
-		
-		File allParkRunnersResponse = ResourceUtils.getFile("classpath:reusable_content/response/get_all_parkrunners_response_body.json");
-		return objectMapper.readValue(allParkRunnersResponse, new TypeReference<List<ParkRunner>>() {});
-		
-	}
-	
-	private ParkRunner prepareMockServiceResponse_getParkRunnerById() throws Exception {
+	private Person prepareMockServiceResponse_getParkRunnerById() throws Exception {
 		
 		File parkRunnerByIdResponse = ResourceUtils.getFile("classpath:reusable_content/response/get_parkrunner_byId_response_body.json");
-		return objectMapper.readValue(parkRunnerByIdResponse, new TypeReference<ParkRunner>(){});
+		return objectMapper.readValue(parkRunnerByIdResponse, new TypeReference<Person>(){});
 		
 	}
 	

@@ -1,6 +1,6 @@
 package com.baeldung.springboot.init;
 
-import com.baeldung.springboot.entity.ParkRunner;
+import com.baeldung.springboot.entity.Person;
 import com.baeldung.springboot.respository.DBSqlExecutor;
 import com.baeldung.springboot.respository.ParkRunnerRepository;
 import org.slf4j.Logger;
@@ -30,17 +30,17 @@ public class H2DataInitializer implements ApplicationRunner {
 		
 		LOGGER.info("H2DataInitializer:run");
 		
-		ParkRunner parkRunner = new ParkRunner();
-		parkRunner.setFirstName("NEERAJ");
-		parkRunner.setLastName("SIDHAYE");
-		parkRunner.setEmail("RestAPI_integrationTest@code.com");
-		parkRunner.setTotalRuns("28");
-		parkRunner.setGender("M");
-		parkRunner.setHomeRun("INDORE");
-		parkRunner.setRunningClub("NA");
-		parkRunner.setPostCode("CW2ZZZ");
+		Person person = new Person();
+		person.setFirstName("FirstJava");
+		person.setLastName("LastJava");
+		person.setEmail("RestAPI_integrationTest@code.com");
+		person.setTotalRuns("28");
+		person.setGender("M");
+		person.setHomeRun("INDORE");
+		person.setRunningClub("NA");
+		person.setPostCode("CW2ZZZ");
 		
-		parkRunnerRepository.save(parkRunner);
+		parkRunnerRepository.save(person);
 		
 	}
 	

@@ -1,7 +1,7 @@
 {
-    "parkRunId": 1,
-    "firstName": "NEERAJ",
-    "lastName": "SIDHAYE",
+    "id": 1,
+    "firstName": "FirstJava",
+    "lastName": "LastJava",
     "gender": "M",
     "homeRun": "INDORE",
     "runningClub": "NA",
