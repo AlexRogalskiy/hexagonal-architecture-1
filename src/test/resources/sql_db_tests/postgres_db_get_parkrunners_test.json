@@ -1,0 +1,49 @@
+{
+    "scenarioName": "Postgres DB SQL Executor - Simple and generic one, you can extend to ",
+    "steps": [
+        {
+            "name": "create_employee",
+            "url": "/api/v1/employees",
+            "operation": "POST",
+            "request": {
+                "body": {
+                    "name" : "Jack"
+                }
+            },
+            "assertions": {
+                "status": 201,
+                "body":{
+                    "id": 1
+                }
+            }
+        },
+        {
+            "name": "get_employee",
+            "url": "/api/v1/employees/${$.create_employee.response.body.id}",
+            "operation": "GET",
+            "request": {},
+            "assertions": {
+                "status": 200,
+                "body":{
+                    "id": 1,
+                    "name" : "Jack"
+                }
+            }
+        },
+        {
+            "name": "verify_in_db",
+            "url": "com.baeldung.springboot.dbutils.PostGresSqlExecutor",
+            "operation": "executeSimpleSql",
+            "request": "select id, name from employees where id='${$.create_employee.response.body.id}';",
+            "assertions": {
+                "rows.SIZE": 1,
+                "rows": [
+                    {
+                        "id": 1,
+                        "name": "${$.create_employee.request.body.name}"
+                    }
+                ]
+            }
+        }
+    ]
+}

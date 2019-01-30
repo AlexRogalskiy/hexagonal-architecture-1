@@ -1,0 +1,22 @@
+package testconfig;
+
+import org.jsmart.zerocode.core.runner.ZeroCodePackageRunner;
+import org.junit.runners.model.InitializationError;
+
+import com.baeldung.springboot.application.SpringBootMainApplication;
+
+/**
+ * 
+ * @author Neeraj Sidhaye
+ *
+ */
+public class E2eJunitSuiteRunner extends ZeroCodePackageRunner {
+
+    static{
+    	SpringBootMainApplication.start();
+    }
+
+    public E2eJunitSuiteRunner(Class<?> klass) throws InitializationError {
+        super(klass);
+    }
+}
