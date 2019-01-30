@@ -1,34 +1,41 @@
 {
-   "scenarioName":"Register a parkRunner and then fetch details of newly created park runner.",
-   "steps":[
-      {
-         "name":"registration_at_ParkRun",
-         "url":"/parkrun/api/v1/persons/",
-         "operation":"POST",
-         "request":{
-            "body": "${JSON.FILE:reusable_content/request/register_runner_request_body.json}"
-          },
-         "assertions":{
-            "status":201,
-            "body":{
-               "location":"$NOT.NULL",
-               "message":"$CONTAINS.STRING:Success"
+    "scenarioName": "Register a parkRunner and then fetch details of newly created park runner.",
+    "steps": [
+        {
+            "name": "create_person",
+            "url": "/parkrun/api/v1/persons/",
+            "operation": "POST",
+            "request": {
+                "body": {
+                    "firstName": "Andy",
+                    "lastName": "Terry",
+                    "gender": "M",
+                    "homeRun": "Swindon",
+                    "runningClub": "RunSwindon",
+                    "email": "runner@park.com",
+                    "postCode": "LW8999"
+                }
+            },
+            "assertions": {
+                "status": 201,
+                "body": {
+                    "location": "$NOT.NULL",
+                    "message": "$CONTAINS.STRING:Success"
+                }
             }
-         }
-      },
-      {
-         "name":"get_ParkRunner_by_id",
-         "url":"/parkrun/api/v1/persons/${$.registration_at_ParkRun.response.body.location}",
-         "operation":"GET",
-         "request":{
-
-         },
-         "assertions":{
-            "status":200,
-            "body":{
-               "id":"$NOT.NULL"
+        },
+        {
+            "name": "get_ParkRunner_by_id",
+            "url": "/parkrun/api/v1/persons/${$.create_person.response.body.location}",
+            "operation": "GET",
+            "request": {
+            },
+            "assertions": {
+                "status": 200,
+                "body": {
+                    "id": "$NOT.NULL"
+                }
             }
-         }
-      }
-   ]
+        }
+    ]
 }

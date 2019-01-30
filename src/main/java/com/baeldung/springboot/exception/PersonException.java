@@ -1,6 +1,6 @@
 package com.baeldung.springboot.exception;
 
-public class ParkRunException extends Exception {
+public class PersonException extends Exception {
 
 	private static final long serialVersionUID = -6930542248556723784L;
 	
@@ -8,11 +8,11 @@ public class ParkRunException extends Exception {
 	private String code;
 	private String message;
 		
-	public ParkRunException() {
+	public PersonException() {
 		super();
 	}
 	
-	public ParkRunException(String id, String code, String message){
+	public PersonException(String id, String code, String message){
 		super(message);
 		this.id = id;
 		this.code = code;

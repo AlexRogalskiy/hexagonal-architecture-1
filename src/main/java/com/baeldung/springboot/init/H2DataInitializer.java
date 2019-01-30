@@ -2,7 +2,7 @@ package com.baeldung.springboot.init;
 
 import com.baeldung.springboot.entity.Person;
 import com.baeldung.springboot.respository.DBSqlExecutor;
-import com.baeldung.springboot.respository.ParkRunnerRepository;
+import com.baeldung.springboot.respository.PersonRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,13 +15,13 @@ public class H2DataInitializer implements ApplicationRunner {
 	
 	private static final Logger LOGGER = LoggerFactory.getLogger(H2DataInitializer.class);
 
-	private ParkRunnerRepository parkRunnerRepository;
+	private PersonRepository personRepository;
 	private DBSqlExecutor dbSqlExecutor;
 	
 	
 	@Autowired
-	public H2DataInitializer(ParkRunnerRepository parkRunnerRepository, DBSqlExecutor dbSqlExecutor) {
-		this.parkRunnerRepository = parkRunnerRepository;
+	public H2DataInitializer(PersonRepository personRepository, DBSqlExecutor dbSqlExecutor) {
+		this.personRepository = personRepository;
 		this.dbSqlExecutor = dbSqlExecutor;
 	}
 	
@@ -40,7 +40,7 @@ public class H2DataInitializer implements ApplicationRunner {
 		person.setRunningClub("NA");
 		person.setPostCode("CW2ZZZ");
 		
-		parkRunnerRepository.save(person);
+		personRepository.save(person);
 		
 	}
 	

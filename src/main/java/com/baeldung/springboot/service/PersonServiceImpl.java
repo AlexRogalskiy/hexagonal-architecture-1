@@ -8,22 +8,22 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.baeldung.springboot.exception.ParkRunException;
+import com.baeldung.springboot.exception.PersonException;
 import com.baeldung.springboot.model.PersonResponse;
-import com.baeldung.springboot.respository.ParkRunnerRepository;
+import com.baeldung.springboot.respository.PersonRepository;
 
 
 @Service
 public class PersonServiceImpl implements PersonService {
 
-	private final ParkRunnerRepository parkRunnerRepository;
+	private final PersonRepository personRepository;
 
 	private final ModelMapper modelMapper;
 
 	@Autowired
-	public PersonServiceImpl(ParkRunnerRepository parkRunnerRepository, ModelMapper modelMapper) {
+	public PersonServiceImpl(PersonRepository personRepository, ModelMapper modelMapper) {
 
-		this.parkRunnerRepository = parkRunnerRepository;
+		this.personRepository = personRepository;
 
 		this.modelMapper = modelMapper;
 	}
@@ -33,17 +33,17 @@ public class PersonServiceImpl implements PersonService {
 
 		Person personEntity = modelMapper.map(personDto, Person.class);
 
-		Person person =  parkRunnerRepository.save(personEntity);
+		Person person =  personRepository.save(personEntity);
 
 		return new PersonResponse("Registration Success.", String.valueOf(person.getId()));
 	}
 
 	@Override
-	public Person getParkRunnerById(Long parkRunnerId) throws ParkRunException {
+	public Person getPersonById(Long personId) throws PersonException {
 
-		Optional<Person> parkRunnerOptional = parkRunnerRepository.findById(parkRunnerId);
+		Optional<Person> person = personRepository.findById(personId);
 
-		return parkRunnerOptional.orElseThrow(() -> new ParkRunException(parkRunnerId.toString(), "404", "Runner Not Found"));
+		return person.orElseThrow(() -> new PersonException(personId.toString(), "404", "Runner Not Found"));
 
 	}
 

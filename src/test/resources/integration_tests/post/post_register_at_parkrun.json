@@ -6,13 +6,21 @@
             "url": "/parkrun/api/v1/persons/",
             "operation": "POST",
             "request": {
-                "body": "${JSON.FILE:reusable_content/request/register_runner_request_body.json}"
+                "body": {
+                    "firstName": "Andy",
+                    "lastName": "Terry",
+                    "gender": "M",
+                    "homeRun": "Swindon",
+                    "runningClub": "RunSwindon",
+                    "email": "runner@park.com",
+                    "postCode": "LW8999"
+                }
             },
             "assertions": {
                 "status": 201,
                 "body": {
                     "location": "$NOT.NULL",
-                    "message": "$CONTAINS.STRING:Success"
+                    "message": "Registration Success."
                 }
             }
         }

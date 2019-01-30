@@ -10,11 +10,11 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 @ControllerAdvice
 public class GlobalExceptionHandler {
 
-	@ExceptionHandler(ParkRunException.class)
-	public ResponseEntity<ErrorResponse> handleException(ParkRunException parkRunException) {
+	@ExceptionHandler(PersonException.class)
+	public ResponseEntity<ErrorResponse> handleException(PersonException personException) {
 		
-		String code = parkRunException.getCode();
-		ErrorResponse errorResponse = new ErrorResponse(parkRunException.getId(), code, parkRunException.getMessage());
+		String code = personException.getCode();
+		ErrorResponse errorResponse = new ErrorResponse(personException.getId(), code, personException.getMessage());
 		switch (code) {
 		
 			case  "404" :
