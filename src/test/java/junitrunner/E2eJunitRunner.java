@@ -5,6 +5,16 @@ import org.junit.runners.model.InitializationError;
 
 import com.baeldung.springboot.application.SpringBootMainApplication;
 
+/**
+ * This JUnit runner is used for the integration tests.
+ * See the package "integrationtests" under "src/test".
+ *
+ * Purpose:
+ * It starts the Web-Application independently on a Tomcat web server as if it is done in a
+ * production env, then fires the Declarative JSON-Tests against the End-Points.
+ *
+ * This thoroughly validates the end-to-end flow and all the Ports and Adapters wirings/injections.
+ */
 public class E2eJunitRunner extends ZeroCodeUnitRunner {
 
     static{
