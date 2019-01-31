@@ -1,4 +1,4 @@
-package junitrunner;
+package integrationtests.junitrunner;
 
 import org.jsmart.zerocode.core.runner.ZeroCodeUnitRunner;
 import org.junit.runners.model.InitializationError;
