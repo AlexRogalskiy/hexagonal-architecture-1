@@ -15,12 +15,6 @@ public class PersonDto {
 	private String gender;
 	
 	@NotNull
-	private String homeRun;
-	
-	@NotNull
-	private String runningClub;
-	
-	@NotNull
 	private String email;
 	
 	@NotNull
@@ -66,34 +60,6 @@ public class PersonDto {
 	 */
 	public void setGender(String gender) {
 		this.gender = gender;
-	}
-
-	/**
-	 * @return the homeRun
-	 */
-	public String getHomeRun() {
-		return homeRun;
-	}
-
-	/**
-	 * @param homeRun the homeRun to set
-	 */
-	public void setHomeRun(String homeRun) {
-		this.homeRun = homeRun;
-	}
-
-	/**
-	 * @return the runningClub
-	 */
-	public String getRunningClub() {
-		return runningClub;
-	}
-
-	/**
-	 * @param runningClub the runningClub to set
-	 */
-	public void setRunningClub(String runningClub) {
-		this.runningClub = runningClub;
 	}
 
 	/**

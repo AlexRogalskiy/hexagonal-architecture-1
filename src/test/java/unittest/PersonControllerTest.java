@@ -110,8 +110,6 @@ public class PersonControllerTest {
         personDto.setFirstName("FirstJava");
         personDto.setLastName("LastJava");
         personDto.setGender("M");
-        personDto.setHomeRun("PUNE RUNNING");
-        personDto.setRunningClub("RUNWAY");
         personDto.setPostCode("CW2ZZZ");
         personDto.setEmail("email@email.com");
 

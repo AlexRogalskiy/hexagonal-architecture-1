@@ -14,6 +14,7 @@ import com.baeldung.springboot.application.SpringBootMainApplication;
  * production env, then fires the Declarative JSON-Tests against the End-Points.
  *
  * This thoroughly validates the end-to-end flow and all the Ports and Adapters wirings/injections.
+ * :::Note::: This is very clean way of loading the App and there was no object mocking needed
  */
 public class E2eJunitRunner extends ZeroCodeUnitRunner {
 
